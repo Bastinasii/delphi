@@ -1,6 +1,6 @@
 ﻿namespace ProiectPAWInterfataSGBD
 {
-    partial class Form1
+    partial class FormularPrincipal
     {
         /// <summary>
         /// Required designer variable.

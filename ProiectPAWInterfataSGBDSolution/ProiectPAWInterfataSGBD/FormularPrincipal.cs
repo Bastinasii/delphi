@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProiectPAWInterfataSGBD
 {
-    public partial class Form1 : Form
+    public partial class FormularPrincipal : Form
     {
-        public Form1()
+        public FormularPrincipal()
         {
             InitializeComponent();
         }
