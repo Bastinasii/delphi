@@ -62,7 +62,6 @@
       <DependentUpon>TEditQueryF.cs</DependentUpon>
     </Compile>
     <Compile Include="TSaveQuery.cs" />
-    <Compile Include="TSQLEditor.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
