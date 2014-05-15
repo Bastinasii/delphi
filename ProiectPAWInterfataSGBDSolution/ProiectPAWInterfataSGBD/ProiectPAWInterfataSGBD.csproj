@@ -62,7 +62,6 @@
     <Compile Include="TEditQueryF.Designer.cs">
       <DependentUpon>TEditQueryF.cs</DependentUpon>
     </Compile>
-    <Compile Include="TSaveQuery.cs" />
     <EmbeddedResource Include="FormularPrincipal.resx">
       <DependentUpon>FormularPrincipal.cs</DependentUpon>
     </EmbeddedResource>

@@ -9,14 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace ProiectPAWInterfataSGBD
 {
     public partial class EditQueryF : Form
     {
-        static List<string> tabele = new List<string>();
-        static List<List<string>> output = new List<List<string>>();
-        static List<string> coloane = new List<string>();
+        public string connString = "user id=Tanase;" +
+                                   "password=badabing;server=localhost;" +
+                                   "database=test1; " +
+                                   "connection timeout=10";
+
+        
         public EditQueryF()
         {
             InitializeComponent();
@@ -25,10 +29,7 @@ namespace ProiectPAWInterfataSGBD
 
         public void updateGrid()
         {
-            string connString = "user id=Tanase;" +
-                                   "password=badabing;server=localhost;" +
-                                   "database=test1; " +
-                                   "connection timeout=10";
+            
             MySqlConnection conn = new MySqlConnection(connString);
             MySqlCommand command = conn.CreateCommand();
             command.CommandText = "SELECT * FROM ANGAJATI;";
@@ -139,17 +140,7 @@ namespace ProiectPAWInterfataSGBD
 
         private void saveSQLScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> list = new List<string>();
-            string text = textBox1.Text;
-            //string [] data = text.Split('\n');
-            string[] data = Regex.Split(text, "\r\n");
-            foreach (var element in data)
-            {
-                list.Add(element);
-            }
-            TSaveQuery save = new TSaveQuery(list);
-            save.SaveToFile();
-
+            saveFileDialog1.ShowDialog();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -159,16 +150,7 @@ namespace ProiectPAWInterfataSGBD
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            List<string> list = new List<string>();
-            string text = textBox1.Text;
-            //string [] data = text.Split('\n');
-            string[] data = Regex.Split(text, "\r\n");
-            foreach (var element in data)
-            {
-                list.Add(element);
-            }
-            TSaveQuery save = new TSaveQuery(list);
-            save.SaveToFile();
+            saveFileDialog1.ShowDialog();
         }
 
         private void listViewTabeleSQLEditor_SelectedIndexChanged(object sender, EventArgs e)
@@ -215,6 +197,55 @@ namespace ProiectPAWInterfataSGBD
         }
 
         private void EditQueryF_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void testSaveFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            string name = saveFileDialog1.FileName;
+            File.WriteAllText(name, textBox1.Text);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            for (int i = 0 ; i < dataGridView1.Rows.Count; i++)
+            {
+                insertGrid(i);
+            }
+            
+        }
+
+        public void insertGrid(int n)
+        {
+            int i=n;
+            try
+            {
+                
+                    MySqlConnection conn = new MySqlConnection(connString);
+                    MySqlCommand command = conn.CreateCommand();
+                    command = new MySqlCommand("insert into angajati(id,nume,salariul) values (" + dataGridView1.Rows[i].Cells[0].Value + ",'" + dataGridView1.Rows[i].Cells[1].Value + "'," + dataGridView1.Rows[i].Cells[2].Value + ")", conn);
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    conn.Close();
+                    label1.Text = "Records inserted successfully";
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                label1.Text = "Records inserted unsuccessfully! Please try again!";
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
