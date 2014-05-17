@@ -15,9 +15,9 @@ namespace ProiectPAWInterfataSGBD
 {
     public partial class EditQueryF : Form
     {
-        public static string connString = "user id=Tanase;" +
-                                   "password=badabing;server=localhost;" +
-                                   "database=test1; " +
+        public static string connString = "user id=Proiect;" +
+                                   "password=proiect;server=localhost;" +
+                                   "database=paw; " +
                                    "connection timeout=10";
         public DataTable dataT = new DataTable();
         public static string tableName; 
@@ -73,10 +73,10 @@ namespace ProiectPAWInterfataSGBD
 
         public void updateGridCommand(string com)
         {
-            string connString = "user id=Tanase;" +
-                                   "password=badabing;server=localhost;" +
-                                   "database=test1; " +
-                                   "connection timeout=10";
+            //string connString = "user id=Tanase;" +
+            //                       "password=badabing;server=localhost;" +
+            //                       "database=test1; " +
+            //                       "connection timeout=10";
             MySqlConnection conn = new MySqlConnection(connString);
             MySqlCommand command = conn.CreateCommand();
             command.CommandText = com;
@@ -319,8 +319,8 @@ namespace ProiectPAWInterfataSGBD
 
         private void listView1_ItemActivate(object sender, EventArgs e)
         {
-            tableName = this.listView1.Items[1].SubItems[1].Text;
-            Console.WriteLine(tableName);
+            //tableName = this.listView1.Items[1].SubItems[1].Text;
+            //Console.WriteLine(tableName);
         }
     }
 }
