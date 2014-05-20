@@ -207,10 +207,20 @@ namespace ProiectPAWInterfataSGBD
             //Console.WriteLine(combo2.Text);
             //Console.WriteLine(text3.Text);
             //Console.WriteLine(pass.Text);
-            String server = combo1.Text;
-            String database = combo2.Text;
-            String user = text3.Text;
-            String passwd = pass.Text;
+            string server;
+            string database;
+            if (this.radio1.Checked)
+            {
+                server = text1.Text;
+                database = text2.Text;
+            }
+            else
+            {
+                server = combo1.Text;
+                database = combo2.Text;
+            }
+            string user = text3.Text;
+            string passwd = pass.Text;
 
             EditQueryF f = new EditQueryF(server, database, user, passwd);
             f.ShowDialog();
@@ -229,6 +239,11 @@ namespace ProiectPAWInterfataSGBD
         {
             MDIParent f = new MDIParent();
             f.ShowDialog();
+        }
+
+        private void FormularPrincipal_Load(object sender, EventArgs e)
+        {
+
         }
 
 
