@@ -37,6 +37,8 @@ namespace ProiectPAWInterfataSGBD
             InitializeComponent();
             this.Text = "Login";
             this.Size = new Size(600, 350);
+            this.AcceptButton = button2;
+            this.CancelButton = button3;
 
             this.group.Location = new Point(20, 20);
             this.group.Size = new Size(150, 90);
