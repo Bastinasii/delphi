@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 using System.IO;
 
+
 namespace ProiectPAWInterfataSGBD
 {
     public partial class EditQueryF : Form
@@ -20,7 +21,9 @@ namespace ProiectPAWInterfataSGBD
                                    "database=paw; " +
                                    "connection timeout=10";
         public DataTable dataT = new DataTable();
-        public static string tableName; 
+        public static string tableName;
+        public static List<string> tablecolumns;
+        public static int rowcount;
 
         
         public EditQueryF()
@@ -45,6 +48,41 @@ namespace ProiectPAWInterfataSGBD
                 }
                 return TableNames;
             }
+        }
+
+        public static List<string> GetColumn()
+        {
+            MySqlConnection conn = new MySqlConnection(connString);
+            MySqlCommand command = conn.CreateCommand();
+            command.CommandText = "SELECT COLUMN_NAME FROM information_schema.COLUMNS C WHERE table_name = '"+ tableName +"'";
+            List<string> list = new List<string>();
+            try
+            {
+                conn.Open();
+                using (var reader = command.ExecuteReader(CommandBehavior.KeyInfo))
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(reader.GetString(0));
+                    }
+                    //var table = reader.GetSchemaTable();
+                    //foreach (DataColumn column in table.Columns)
+                    //{
+                    //    Console.WriteLine(column.ColumnName.ToString());
+                    //    list.Add(column.ColumnName);
+                    //}
+                    foreach (var element in list)
+                    {
+                        Console.WriteLine(element);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { conn.Close(); }
+            return list;
         }
 
         public void updateGrid()
@@ -110,6 +148,7 @@ namespace ProiectPAWInterfataSGBD
                 nou.SubItems.Add(element);
                 listView1.Items.Add(nou);
             }
+            
         }
 
         public void refreashTabel()
@@ -236,23 +275,51 @@ namespace ProiectPAWInterfataSGBD
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            for (int i = 0 ; i < dataGridView1.Rows.Count; i++)
+            Console.WriteLine(rowcount);
+            for (int i = rowcount-1; i < dataGridView1.Rows.Count-1; i++)
             {
                 insertGrid(i);
             }
+            rowcount = dataGridView1.Rows.Count;
             
         }
 
         public void insertGrid(int n)
         {
             int i=n;
+            int j, m;
             try
             {
-                
+                Console.WriteLine("Click");
                     MySqlConnection conn = new MySqlConnection(connString);
                     MySqlCommand command = conn.CreateCommand();
-                    command = new MySqlCommand("insert into `angajati` (`ID`, `Nume`, `Salariul`) values (" + dataGridView1.Rows[i].Cells[0].Value + ",'" + dataGridView1.Rows[i].Cells[1].Value + "'," + dataGridView1.Rows[i].Cells[2].Value + ")", conn);
+                    string com = "insert into `" + tableName + "` (";
+                    m = tablecolumns.Count;
+                    for (j = 0; j < m;j++)
+                    {
+                        if (j == m - 1)
+                        {
+                            com += "`" + tablecolumns[j] + "`) ";
+                        }
+                        else
+                        {
+                            com += "`" + tablecolumns[j] + "`, ";
+                        }
+                    }
+                    com += "values (";
+                    for (j = 0; j < m; j++)
+                    {
+                        if (j == m - 1)
+                        {
+                            com += "'" + dataGridView1.Rows[i].Cells[j].Value + "') ";
+                        }
+                        else
+                        {
+                            com += "'" + dataGridView1.Rows[i].Cells[j].Value + "', ";
+                        }
+                    }
+                    //com += "values (" + dataGridView1.Rows[i].Cells[0].Value + ",'" + dataGridView1.Rows[i].Cells[1].Value + "'," + dataGridView1.Rows[i].Cells[2].Value + ")";
+                        command = new MySqlCommand(com, conn);
                     conn.Open();
                     command.ExecuteNonQuery();
                     conn.Close();
@@ -314,7 +381,11 @@ namespace ProiectPAWInterfataSGBD
                 //listView1.SelectedItems
             //    this.listView1.Focus();
             //    this.listView1.Items[0].Selected = true;
+                
             }
+            rowcount=dataGridView1.Rows.Count;
+            tablecolumns = GetColumn();
+            Console.WriteLine(rowcount);
         }
 
         private void listView1_ItemActivate(object sender, EventArgs e)
@@ -325,7 +396,18 @@ namespace ProiectPAWInterfataSGBD
 
         private void testQueryToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            GetColumn();
+        }
 
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Console.WriteLine("Test!");
+            Console.WriteLine(dataGridView1.CurrentCell.RowIndex);
         }
     }
 }
