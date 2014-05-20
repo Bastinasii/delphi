@@ -14,9 +14,9 @@ namespace ProiectPAWInterfataSGBD
 {
     public partial class PopulareTreeView : Form
     {
-        public static string connString = "user id=root;" +
-                                   "password=;server=localhost;" +
-                                   "database=paw; " +
+        public static string connString = "user id=dima.david1;" +
+                                   "password=12345;server=localhost;" +
+                                   "database=david; " +
                                    "connection timeout=10";
         MySqlConnection cn = new MySqlConnection(connString);
         public static List<List<string>> colList = new List<List<string>>();
@@ -97,7 +97,7 @@ namespace ProiectPAWInterfataSGBD
 
                    //nod.Nodes.Add(datar["prenume"].ToString());
                    //nod.Nodes.Add(datar["varsta"].ToString());
-                   nod.Nodes.Add(datar["Salariu"].ToString());
+                   nod.Nodes.Add(datar["Salariul"].ToString());
                    treeView1.Nodes.Add(nod);
 
                }

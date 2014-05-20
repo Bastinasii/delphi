@@ -43,6 +43,7 @@
     <Reference Include="MySql.Web, Version=6.1.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,6 +59,12 @@
     </Compile>
     <Compile Include="FormularPrincipal.Designer.cs">
       <DependentUpon>FormularPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MDIParent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MDIParent.Designer.cs">
+      <DependentUpon>MDIParent.cs</DependentUpon>
     </Compile>
     <Compile Include="PopulareTreeView.cs">
       <SubType>Form</SubType>
@@ -77,6 +84,9 @@
     <EmbeddedResource Include="FormularPrincipal.resx">
       <DependentUpon>FormularPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MDIParent.resx">
+      <DependentUpon>MDIParent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PopulareTreeView.resx">
       <DependentUpon>PopulareTreeView.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,9 +102,6 @@
     <EmbeddedResource Include="TEditQueryF.resx">
       <DependentUpon>TEditQueryF.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="dbconfig.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -110,9 +117,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dbconfig.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="config.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
