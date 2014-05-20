@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<servers>
+  <server>
+    <name>localhost</name>
+    <database>
+      <dbname>paw</dbname>
+    </database>
+  </server>
+  <server>
+    <name>localhost2</name>
+    <database>
+      <dbname>paw2</dbname>
+    </database>
+    <database>
+      <dbname>paw22</dbname>
+    </database>
+  </server>
+  <server>
+    <name>localhost3</name>
+    <database>
+      <dbname>paw3</dbname>
+    </database>
+  </server>
+  <server>
+    <name></name>
+    <database>
+      <dbname></dbname>
+    </database>
+  </server>
+  <server>
+    <name></name>
+    <database>
+      <dbname></dbname>
+    </database>
+  </server>
+  <server>
+    <name></name>
+    <database>
+      <dbname></dbname>
+    </database>
+  </server>
+</servers>

@@ -29,26 +29,28 @@ namespace ProiectPAWInterfataSGBD
         Button button3 = new Button();
         Button button2 = new Button();
 
+        XmlReadWrite dbConf = new XmlReadWrite();
+
         public FormularPrincipal()
         {
             InitializeComponent();
             this.Text = "Login";
             this.Size = new Size(600, 350);
 
-            group.Location = new Point(20, 20);
-            group.Size = new Size(150, 90);
-            group.Text = "Connection:";
+            this.group.Location = new Point(20, 20);
+            this.group.Size = new Size(150, 90);
+            this.group.Text = "Connection:";
 
-            radio1.Text = "New Connection";
-            radio1.Location = new Point(10, 20);
-            radio1.Size = new Size(130, 30);
+            this.radio1.Text = "New Connection";
+            this.radio1.Location = new Point(10, 20);
+            this.radio1.Size = new Size(130, 30);
 
-            radio2.Text = "Existing Connection";
-            radio2.Location = new Point(10, 50);
-            radio2.Size = new Size(130, 30);
+            this.radio2.Text = "Existing Connection";
+            this.radio2.Location = new Point(10, 50);
+            this.radio2.Size = new Size(130, 30);
 
-            group.Controls.Add(radio1);
-            group.Controls.Add(radio2);
+            this.group.Controls.Add(radio1);
+            this.group.Controls.Add(radio2);
 
             this.Controls.Add(group);
 
@@ -77,11 +79,13 @@ namespace ProiectPAWInterfataSGBD
             this.combo1.Location = new Point(270, 44);
             this.combo1.Size = new Size(150, 20);
             this.combo1.Visible = false;
+            this.combo1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.Controls.Add(combo1);
 
             this.combo2.Location = new Point(270, 74);
             this.combo2.Size = new Size(150, 20);
             this.combo2.Visible = false;
+            this.combo2.DropDownStyle = ComboBoxStyle.DropDownList;
             this.Controls.Add(combo2);
 
             this.check.Location = new Point(205, 107);
@@ -125,6 +129,9 @@ namespace ProiectPAWInterfataSGBD
 
             this.radio1.CheckedChanged += new EventHandler(this.choice);
             this.radio2.CheckedChanged += new EventHandler(this.choice);
+
+            this.combo1.SelectedIndexChanged += new EventHandler(this.getDbs);
+            
             this.button3.Click += new EventHandler(this.exit);
         }
 
@@ -173,7 +180,16 @@ namespace ProiectPAWInterfataSGBD
                 this.text2.Text = "";
                 this.check.Visible = false;
                 this.check.Checked = false;
+                //Console.Write("A intrat");
+                combo1.DataSource = dbConf.readXml();
+                combo2.DataSource = dbConf.readXml(combo1.Text);
             }
+        }
+
+        void getDbs(object sender, EventArgs e)
+        {
+            //Console.WriteLine(combo2.Text + "\n");
+            combo2.DataSource = dbConf.readXml(combo1.Text);
         }
 
         void exit(object sender, EventArgs e)
