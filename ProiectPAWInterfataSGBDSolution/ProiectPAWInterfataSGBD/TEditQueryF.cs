@@ -15,8 +15,8 @@ namespace ProiectPAWInterfataSGBD
 {
     public partial class EditQueryF : Form
     {
-        public static string connString = "user id=Proiect;" +
-                                   "password=proiect;server=localhost;" +
+        public static string connString = "user id=root;" +
+                                   "password=;server=localhost;" +
                                    "database=paw; " +
                                    "connection timeout=10";
         public DataTable dataT = new DataTable();
