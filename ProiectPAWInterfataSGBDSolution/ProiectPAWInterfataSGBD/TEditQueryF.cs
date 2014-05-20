@@ -16,14 +16,18 @@ namespace ProiectPAWInterfataSGBD
 {
     public partial class EditQueryF : Form
     {
-        public static string connString = "user id=root;" +
-                                   "password=;server=localhost;" +
-                                   "database=paw; " +
+        public static string connString = "user id="+user+";" +
+                                   "password="+pass+";server="+server+";" +
+                                   "database="+databasename+"; " +
                                    "connection timeout=10";
         public DataTable dataT = new DataTable();
         public static string tableName;
         public static List<string> tablecolumns;
         public static int rowcount;
+        public static string user;
+        public static string pass;
+        public static string databasename;
+        public static string server;
 
         
         public EditQueryF()
@@ -31,6 +35,17 @@ namespace ProiectPAWInterfataSGBD
             InitializeComponent();
             //updateGrid();
             updateTables();
+        }
+
+        public EditQueryF(string ser, string dataB, string us, string p)
+        {
+            InitializeComponent();
+            //updateGrid();
+            updateTables();
+            server = ser;
+            databasename = dataB;
+            user = us;
+            pass = p;
         }
 
         
@@ -48,6 +63,55 @@ namespace ProiectPAWInterfataSGBD
                 }
                 return TableNames;
             }
+        }
+
+        public static List<List<string>> GetColumnLists()
+        {
+            List<string> tables = GetTables();
+            List<List<string>> list = new List<List<string>>();
+
+            for (int i = 0; i < tables.Count;i++ )
+            {
+                string s = tables[i];
+                list.Add(GetColumnString(s));
+            }
+
+                return list;
+        }
+
+        public static List<string> GetColumnString(string s)
+        {
+            MySqlConnection conn = new MySqlConnection(connString);
+            MySqlCommand command = conn.CreateCommand();
+            command.CommandText = "SELECT COLUMN_NAME FROM information_schema.COLUMNS C WHERE table_name = '" + s + "'";
+            List<string> list = new List<string>();
+            try
+            {
+                conn.Open();
+                using (var reader = command.ExecuteReader(CommandBehavior.KeyInfo))
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(reader.GetString(0));
+                    }
+                    //var table = reader.GetSchemaTable();
+                    //foreach (DataColumn column in table.Columns)
+                    //{
+                    //    Console.WriteLine(column.ColumnName.ToString());
+                    //    list.Add(column.ColumnName);
+                    //}
+                    foreach (var element in list)
+                    {
+                        Console.WriteLine(element);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { conn.Close(); }
+            return list;
         }
 
         public static List<string> GetColumn()
@@ -494,7 +558,7 @@ namespace ProiectPAWInterfataSGBD
 
         private void button6_Click(object sender, EventArgs e)
         {
-            PopulareTreeView f2 = new PopulareTreeView();
+            PopulareTreeView f2 = new PopulareTreeView(databasename, GetColumnLists(),GetTables());
             f2.ShowDialog();
         }
     }
