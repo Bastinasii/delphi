@@ -32,7 +32,7 @@ namespace ProiectPAWInterfataSGBD
 
             while (reader.Read())
             {
-                Console.Write(reader.Name + "\n");
+                //Console.Write(reader.Name + "\n");
                 if (reader.Name == srvTag)
                 {
                     reader.Read();
@@ -42,7 +42,7 @@ namespace ProiectPAWInterfataSGBD
             }
             reader.Close();
 
-            Console.Write("Aici");
+            //Console.Write("Aici");
             return servers;
         }
 

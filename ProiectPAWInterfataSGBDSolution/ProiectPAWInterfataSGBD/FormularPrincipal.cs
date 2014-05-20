@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Controls;
 
 namespace ProiectPAWInterfataSGBD
 {
@@ -25,7 +26,7 @@ namespace ProiectPAWInterfataSGBD
         Label label3 = new Label();
         TextBox text3 = new TextBox();
         Label label4 = new Label();
-        MaskedTextBox pass = new MaskedTextBox();
+        TextBox pass = new TextBox();
         Button button3 = new Button();
         Button button2 = new Button();
 
@@ -114,6 +115,7 @@ namespace ProiectPAWInterfataSGBD
             this.pass.Location = new Point(365, 160);
             this.pass.Size = new Size(150, 20);
             this.pass.Visible = false;
+            this.pass.PasswordChar = '*';
             this.Controls.Add(pass);
 
             this.button2.Location = new Point(205, 190);
@@ -133,6 +135,8 @@ namespace ProiectPAWInterfataSGBD
             this.combo1.SelectedIndexChanged += new EventHandler(this.getDbs);
             
             this.button3.Click += new EventHandler(this.exit);
+
+            this.button2.Click += new EventHandler(this.login);
         }
 
         void choice(object sender, EventArgs e)
@@ -197,7 +201,20 @@ namespace ProiectPAWInterfataSGBD
             this.Close();
         }
 
+        void login(object sender, EventArgs e)
+        {
+            //Console.WriteLine(combo1.Text);
+            //Console.WriteLine(combo2.Text);
+            //Console.WriteLine(text3.Text);
+            //Console.WriteLine(pass.Text);
+            String server = combo1.Text;
+            String database = combo2.Text;
+            String user = text3.Text;
+            String passwd = pass.Text;
 
+            EditQueryF f = new EditQueryF(server, database, user, passwd);
+            f.ShowDialog();
+        }
 
         
 
