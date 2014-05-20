@@ -409,5 +409,93 @@ namespace ProiectPAWInterfataSGBD
             Console.WriteLine("Test!");
             Console.WriteLine(dataGridView1.CurrentCell.RowIndex);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+        public void updateG(int n)
+        {
+            int i = n;
+            int j, m;
+            try
+            {
+                Console.WriteLine("Click");
+                MySqlConnection conn = new MySqlConnection(connString);
+                MySqlCommand command = conn.CreateCommand();
+                string com = "update `" + tableName + "` (";
+                m = tablecolumns.Count;
+                for (j = 0; j < m; j++)
+                {
+                    if (j == m - 1)
+                    {
+                        com += "`" + tablecolumns[j] + "`) ";
+                    }
+                    else
+                    {
+                        com += "`" + tablecolumns[j] + "`, ";
+                    }
+                }
+                com += "values (";
+                for (j = 0; j < m; j++)
+                {
+                    if (j == m - 1)
+                    {
+                        com += "'" + dataGridView1.Rows[i].Cells[j].Value + "') ";
+                    }
+                    else
+                    {
+                        com += "'" + dataGridView1.Rows[i].Cells[j].Value + "', ";
+                    }
+                }
+                //com += "values (" + dataGridView1.Rows[i].Cells[0].Value + ",'" + dataGridView1.Rows[i].Cells[1].Value + "'," + dataGridView1.Rows[i].Cells[2].Value + ")";
+                command = new MySqlCommand(com, conn);
+                conn.Open();
+                command.ExecuteNonQuery();
+                conn.Close();
+                label1.Text = "Records inserted successfully";
+
+
+            }
+            catch (Exception ex)
+            {
+                String s = ex.Message;
+                String[] a = s.Split(';');
+                String[] b = s.Split(' ');
+                String p1 = "You have an error in your SQL syntax";
+                String p2 = "Duplicate";
+                //Console.WriteLine(a[0]);
+                if (a[0] != p1 && b[0] != p2)
+                {
+                    MessageBox.Show(ex.Message);
+                    label1.Text = "Error!";
+                }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(connString);
+                MySqlCommand command = conn.CreateCommand();
+                string com = "drop table `" + tableName + "`";
+                command = new MySqlCommand(com, conn);
+                conn.Open();
+                command.ExecuteNonQuery();
+                conn.Close();
+                label1.Text = "Table has been dropped";
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            PopulareTreeView f2 = new PopulareTreeView();
+            f2.ShowDialog();
+        }
     }
 }

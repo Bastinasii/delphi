@@ -30,7 +30,7 @@ namespace ProiectPAWInterfataSGBD
 
         List<string> readXml(String server)
         {
-            List<string> dbs = new List<string();
+            List<string> dbs = new List<string>();
             XmlTextReader reader = new XmlTextReader("dbconfig.xml");
 
 
