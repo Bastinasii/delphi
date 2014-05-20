@@ -61,6 +61,7 @@
             this.Controls.Add(this.button1);
             this.Name = "FormularPrincipal";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.FormularPrincipal_Load);
             this.ResumeLayout(false);
 
         }

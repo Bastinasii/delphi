@@ -19,13 +19,30 @@ namespace ProiectPAWInterfataSGBD
                                    "database=david; " +
                                    "connection timeout=10";
         MySqlConnection cn = new MySqlConnection(connString);
-        List<string> list = new List<string>();
-        string numetab;
-        public static DataTable table = new DataTable();
+        public static List<List<string>> colList = new List<List<string>>();
+        public static List<string> tabList = new List<string>();
+        public static string numeBD;
+        
 
         public void updateTree()
         {
+            TreeNode nodBD = new TreeNode();
 
+            nodBD.Text = numeBD;
+
+            for(int i=0;i<tabList.Count;i++)
+            {
+                TreeNode nodTab = new TreeNode();
+
+                for(int j=0;j<colList[i].Count;j++)
+                {
+                    TreeNode nodCol = new TreeNode();
+                    nodCol.Text = colList[i][j];
+                    nodTab.Nodes.Add(nodCol);
+                }
+                nodBD.Nodes.Add(nodTab);
+            }
+            treeView1.Nodes.Add(nodBD);
         }
 
         public PopulareTreeView()
@@ -34,14 +51,14 @@ namespace ProiectPAWInterfataSGBD
 
         }
 
-        public PopulareTreeView(DataTable t, List<string> columnList, string tablename)
+        public PopulareTreeView(string numeBaza, List<List<string>> columnList, List<string> table)
         {
             
             InitializeComponent();
-            table = t;
-            BindingSource bs = new BindingSource();
-            bs.DataSource = table;
-            
+            colList = columnList;
+            tabList = table;
+            numeBD = numeBaza;
+            updateTree();
         }
 
         private void PopulareTreeView_Shown(object sender, EventArgs e)
@@ -73,9 +90,10 @@ namespace ProiectPAWInterfataSGBD
                    TreeNode nod = new TreeNode(datar["id"].ToString());
                    nod.Nodes.Add(datar["nume"].ToString());
                    TreeNode Nod2 = new TreeNode();
+                   nod.Nodes.Add(Nod2);
                    Nod2.Text = "Mata";
                    Nod2.Nodes.Add(new TreeNode("Tactu"));
-                   nod.Nodes.Add(Nod2);
+                   
 
                    //nod.Nodes.Add(datar["prenume"].ToString());
                    //nod.Nodes.Add(datar["varsta"].ToString());
