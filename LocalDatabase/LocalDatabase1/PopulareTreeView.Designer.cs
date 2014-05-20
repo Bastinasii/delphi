@@ -58,6 +58,7 @@
             this.Controls.Add(this.button1);
             this.Name = "PopulareTreeView";
             this.Text = "PopulareTreeView";
+            this.Load += new System.EventHandler(this.PopulareTreeView_Load);
             this.Shown += new System.EventHandler(this.PopulareTreeView_Shown);
             this.ResumeLayout(false);
 

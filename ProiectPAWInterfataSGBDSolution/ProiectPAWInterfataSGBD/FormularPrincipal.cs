@@ -192,6 +192,12 @@ namespace ProiectPAWInterfataSGBD
 
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MDIParent f = new MDIParent();
+            f.ShowDialog();
+        }
+
 
 
     }
