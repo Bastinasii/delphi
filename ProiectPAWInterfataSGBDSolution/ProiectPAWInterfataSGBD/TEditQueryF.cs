@@ -322,5 +322,10 @@ namespace ProiectPAWInterfataSGBD
             //tableName = this.listView1.Items[1].SubItems[1].Text;
             //Console.WriteLine(tableName);
         }
+
+        private void testQueryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
