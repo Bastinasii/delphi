@@ -34,6 +34,7 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runSQLScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveSQLScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreashTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreashGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -46,7 +47,7 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.refreashTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -74,6 +75,7 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.testQueryToolStripMenuItem,
             this.runSQLScriptToolStripMenuItem,
             this.saveSQLScriptToolStripMenuItem,
             this.refreashTableToolStripMenuItem,
@@ -96,6 +98,13 @@
             this.saveSQLScriptToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveSQLScriptToolStripMenuItem.Text = "Save SQL Script";
             this.saveSQLScriptToolStripMenuItem.Click += new System.EventHandler(this.saveSQLScriptToolStripMenuItem_Click);
+            // 
+            // refreashTableToolStripMenuItem
+            // 
+            this.refreashTableToolStripMenuItem.Name = "refreashTableToolStripMenuItem";
+            this.refreashTableToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.refreashTableToolStripMenuItem.Text = "Refreash Table";
+            this.refreashTableToolStripMenuItem.Click += new System.EventHandler(this.refreashTableToolStripMenuItem_Click);
             // 
             // refreashGridToolStripMenuItem
             // 
@@ -204,12 +213,12 @@
             // 
             this.columnHeader2.Text = "Tables";
             // 
-            // refreashTableToolStripMenuItem
+            // testQueryToolStripMenuItem
             // 
-            this.refreashTableToolStripMenuItem.Name = "refreashTableToolStripMenuItem";
-            this.refreashTableToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.refreashTableToolStripMenuItem.Text = "Refreash Table";
-            this.refreashTableToolStripMenuItem.Click += new System.EventHandler(this.refreashTableToolStripMenuItem_Click);
+            this.testQueryToolStripMenuItem.Name = "testQueryToolStripMenuItem";
+            this.testQueryToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.testQueryToolStripMenuItem.Text = "Test Query";
+            this.testQueryToolStripMenuItem.Click += new System.EventHandler(this.testQueryToolStripMenuItem_Click);
             // 
             // EditQueryF
             // 
@@ -257,6 +266,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ToolStripMenuItem refreashTableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem testQueryToolStripMenuItem;
     }
 }
 
