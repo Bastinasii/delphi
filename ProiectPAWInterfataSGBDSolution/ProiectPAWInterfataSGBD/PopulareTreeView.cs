@@ -33,7 +33,7 @@ namespace ProiectPAWInterfataSGBD
             for(int i=0;i<tabList.Count;i++)
             {
                 TreeNode nodTab = new TreeNode();
-
+                nodTab.Text = tabList[i];
                 for(int j=0;j<colList[i].Count;j++)
                 {
                     TreeNode nodCol = new TreeNode();

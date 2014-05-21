@@ -25,6 +25,7 @@ namespace ProiectPAWInterfataSGBD
         public static string pass;
         public static string databasename;
         public static string server;
+        public static int delIndex;
         public static string connString;
 
         
@@ -37,10 +38,6 @@ namespace ProiectPAWInterfataSGBD
 
         public EditQueryF(string ser, string dataB, string us, string p)
         {
-            Console.WriteLine(ser);
-            Console.WriteLine(dataB);
-            Console.WriteLine(us);
-            Console.WriteLine(p);
             InitializeComponent();
             //updateGrid();
             server = ser;
@@ -435,11 +432,13 @@ namespace ProiectPAWInterfataSGBD
 
         private void dataGridView1_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int Index = dataGridView1.CurrentCell.ColumnIndex;
-            string name = dataGridView1.Columns[Index].Name;
-            string command = "Select "+name+" from angajati;";
-            textBox1.Text = command;
-            updateGridCommand(textBox1.Text);
+            delIndex = dataGridView1.CurrentCell.ColumnIndex;
+            
+
+            //string name = dataGridView1.Columns[Index].Name;
+            //string command = "Select "+name+" from angajati;";
+            //textBox1.Text = command;
+            //updateGridCommand(textBox1.Text);
         }
 
         private void refreashTableToolStripMenuItem_Click(object sender, EventArgs e)
@@ -577,6 +576,34 @@ namespace ProiectPAWInterfataSGBD
         {
             PopulareTreeView f2 = new PopulareTreeView(databasename, GetColumnLists(),GetTables());
             f2.ShowDialog();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            delIndex = dataGridView1.CurrentCell.ColumnIndex;
+            int n = tablecolumns.Count;
+            string com = "DELETE FROM `" + tableName + "` WHERE " + tablecolumns[0] + " = " + dataGridView1.Rows[delIndex].Cells[0].Value + "";
+            //dataGridView1.Rows[i].Cells[j].Value
+            Console.WriteLine(delIndex);
+            Console.WriteLine(dataGridView1.Rows[delIndex].Cells[0].Value);
+            Console.WriteLine(com);
+            MySqlConnection conn = new MySqlConnection(connString);
+
+            try
+            {
+                conn.Open();
+                MySqlCommand command = new MySqlCommand(com, conn);
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

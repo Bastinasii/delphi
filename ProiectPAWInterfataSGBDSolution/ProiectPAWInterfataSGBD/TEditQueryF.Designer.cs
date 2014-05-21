@@ -53,6 +53,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -230,7 +231,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(482, 343);
+            this.button2.Location = new System.Drawing.Point(497, 343);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 11;
@@ -240,7 +241,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(388, 343);
+            this.button3.Location = new System.Drawing.Point(416, 343);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 12;
@@ -249,7 +250,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(294, 343);
+            this.button4.Location = new System.Drawing.Point(335, 343);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 13;
@@ -259,7 +260,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(187, 343);
+            this.button5.Location = new System.Drawing.Point(246, 343);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(83, 23);
             this.button5.TabIndex = 14;
@@ -268,7 +269,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(106, 343);
+            this.button6.Location = new System.Drawing.Point(165, 343);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 15;
@@ -276,11 +277,22 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(84, 343);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 16;
+            this.button7.Text = "Delete";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // EditQueryF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(690, 376);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -333,6 +345,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }
 
