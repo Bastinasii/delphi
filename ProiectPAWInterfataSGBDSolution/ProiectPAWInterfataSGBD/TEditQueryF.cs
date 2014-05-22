@@ -506,7 +506,25 @@ namespace ProiectPAWInterfataSGBD
 
         private void button2_Click(object sender, EventArgs e)
         {
+            List<string> varCells = new List<string>();
+            int j = delIndex;
+            int n = tablecolumns.Count;
+            //dataGridView1.Rows[i].Cells[j].Value
+            for (int i=0;i<n;i++)
+            {
+                string s = "";
+                varCells.Add(s+dataGridView1.Rows[j].Cells[i].Value);
+            }
+            try
+            {
 
+                UpdateForm f = new UpdateForm(tablecolumns, varCells,connString,tableName);
+                f.ShowDialog();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public void updateG(int n)
         {
