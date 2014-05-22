@@ -53,6 +53,20 @@ namespace ProiectPAWInterfataSGBD
             
         }
 
+        public EditQueryF(string conn, string tableN)
+        {
+            InitializeComponent();
+            //updateGrid();
+
+            connString = conn;
+            Console.WriteLine(connString);
+            tableName = tableN;
+            Console.WriteLine(tableName);
+            updateTables();
+            updateGrid();
+
+        }
+
         
 
         public static List<string> GetTables()
@@ -604,6 +618,12 @@ namespace ProiectPAWInterfataSGBD
             {
                 conn.Close();
             }
+        }
+
+        private void testChartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Chart f = new Chart(connString);
+            f.ShowDialog();
         }
     }
 }

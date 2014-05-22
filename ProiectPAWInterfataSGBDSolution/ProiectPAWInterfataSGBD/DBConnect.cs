@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ReportingMondule
+namespace ProiectPAWInterfataSGBD
 {
     public class DBConnect
     {
@@ -20,6 +20,16 @@ namespace ReportingMondule
             public DBConnect()
             {
                 Initialize();
+            }
+
+            public DBConnect(string c)
+            {
+                InitializeString(c);
+            }
+
+        public void InitializeString(string c)
+            {
+                conn = new MySqlConnection(c);
             }
 
     //Initialize values
