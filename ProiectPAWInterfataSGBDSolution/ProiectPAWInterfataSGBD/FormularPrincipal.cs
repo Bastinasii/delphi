@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Controls;
 
 namespace ProiectPAWInterfataSGBD
 {
     public partial class FormularPrincipal : Form
     {
+        public static MDIParent fMDI;
         GroupBox group = new GroupBox();
         RadioButton radio1 = new RadioButton();
         RadioButton radio2 = new RadioButton();
@@ -25,7 +27,7 @@ namespace ProiectPAWInterfataSGBD
         Label label3 = new Label();
         TextBox text3 = new TextBox();
         Label label4 = new Label();
-        MaskedTextBox pass = new MaskedTextBox();
+        TextBox pass = new TextBox();
         Button button3 = new Button();
         Button button2 = new Button();
 
@@ -36,6 +38,8 @@ namespace ProiectPAWInterfataSGBD
             InitializeComponent();
             this.Text = "Login";
             this.Size = new Size(600, 350);
+            this.AcceptButton = button2;
+            this.CancelButton = button3;
 
             this.group.Location = new Point(20, 20);
             this.group.Size = new Size(150, 90);
@@ -114,6 +118,7 @@ namespace ProiectPAWInterfataSGBD
             this.pass.Location = new Point(365, 160);
             this.pass.Size = new Size(150, 20);
             this.pass.Visible = false;
+            this.pass.PasswordChar = '*';
             this.Controls.Add(pass);
 
             this.button2.Location = new Point(205, 190);
@@ -133,6 +138,8 @@ namespace ProiectPAWInterfataSGBD
             this.combo1.SelectedIndexChanged += new EventHandler(this.getDbs);
             
             this.button3.Click += new EventHandler(this.exit);
+
+            this.button2.Click += new EventHandler(this.login);
         }
 
         void choice(object sender, EventArgs e)
@@ -197,22 +204,58 @@ namespace ProiectPAWInterfataSGBD
             this.Close();
         }
 
+        void login(object sender, EventArgs e)
+        {
+            //Console.WriteLine(combo1.Text);
+            //Console.WriteLine(combo2.Text);
+            //Console.WriteLine(text3.Text);
+            //Console.WriteLine(pass.Text);
+            string server;
+            string database;
+            if (this.radio1.Checked)
+            {
+                server = text1.Text;
+                database = text2.Text;
+            }
+            else
+            {
+                server = combo1.Text;
+                database = combo2.Text;
+            }
+            string user = text3.Text;
+            string passwd = pass.Text;
 
+            //EditQueryF f = new EditQueryF(server, database, user, passwd);
+            //f.ShowDialog();
+
+            fMDI = new MDIParent(server, database, user, passwd);
+            this.Hide();
+            fMDI.ShowDialog();
+            this.Show();
+        }
 
         
 
         private void button1_Click(object sender, EventArgs e)
         {
-            EditQueryF f = new EditQueryF();
-            f.ShowDialog();
-
+            //EditQueryF f = new EditQueryF();
+            //f.Show();
+            //MDIParent f = new MDIParent();
+            //this.Hide();
+            //f.ShowDialog();
+            //this.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             
             MDIParent f = new MDIParent();
-            f.ShowDialog();
+            f.Show();
+        }
+
+        private void FormularPrincipal_Load(object sender, EventArgs e)
+        {
+
         }
 
 
