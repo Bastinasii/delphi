@@ -32,6 +32,7 @@
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.populareTreeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.populareTreeViewMoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +50,8 @@
             // 
             this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.populareTreeViewToolStripMenuItem,
-            this.populareTreeViewMoreToolStripMenuItem});
+            this.populareTreeViewMoreToolStripMenuItem,
+            this.exitToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.newToolStripMenuItem.Text = "New";
@@ -57,7 +59,7 @@
             // populareTreeViewToolStripMenuItem
             // 
             this.populareTreeViewToolStripMenuItem.Name = "populareTreeViewToolStripMenuItem";
-            this.populareTreeViewToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.populareTreeViewToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.populareTreeViewToolStripMenuItem.Text = "PopulareTreeView";
             this.populareTreeViewToolStripMenuItem.Click += new System.EventHandler(this.populareTreeViewToolStripMenuItem_Click);
             // 
@@ -67,6 +69,13 @@
             this.populareTreeViewMoreToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.populareTreeViewMoreToolStripMenuItem.Text = "PopulareTree View More";
             this.populareTreeViewMoreToolStripMenuItem.Click += new System.EventHandler(this.populareTreeViewMoreToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // MDIParent
             // 
@@ -91,5 +100,6 @@
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem populareTreeViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem populareTreeViewMoreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }

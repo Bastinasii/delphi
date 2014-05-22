@@ -497,5 +497,15 @@ namespace ProiectPAWInterfataSGBD
             PopulareTreeView f2 = new PopulareTreeView();
             f2.ShowDialog();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

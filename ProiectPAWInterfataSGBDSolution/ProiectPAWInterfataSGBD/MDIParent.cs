@@ -45,5 +45,10 @@ namespace ProiectPAWInterfataSGBD
             f3.MdiParent = this;
             f3.Show();
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
