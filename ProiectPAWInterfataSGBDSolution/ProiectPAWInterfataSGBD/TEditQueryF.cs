@@ -643,5 +643,11 @@ namespace ProiectPAWInterfataSGBD
             Chart f = new Chart(connString);
             f.ShowDialog();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Form Create = new Form();
+            Create.Show();
+        }
     }
 }
