@@ -34,7 +34,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runSQLScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveSQLScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreashTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,12 +80,11 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testChartToolStripMenuItem,
-            this.testQueryToolStripMenuItem,
             this.runSQLScriptToolStripMenuItem,
             this.saveSQLScriptToolStripMenuItem,
             this.refreashTableToolStripMenuItem,
             this.refreashGridToolStripMenuItem,
+            this.testChartToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
@@ -96,15 +94,8 @@
             // 
             this.testChartToolStripMenuItem.Name = "testChartToolStripMenuItem";
             this.testChartToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.testChartToolStripMenuItem.Text = "Test Chart";
+            this.testChartToolStripMenuItem.Text = "Show chart";
             this.testChartToolStripMenuItem.Click += new System.EventHandler(this.testChartToolStripMenuItem_Click);
-            // 
-            // testQueryToolStripMenuItem
-            // 
-            this.testQueryToolStripMenuItem.Name = "testQueryToolStripMenuItem";
-            this.testQueryToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.testQueryToolStripMenuItem.Text = "Test Query";
-            this.testQueryToolStripMenuItem.Click += new System.EventHandler(this.testQueryToolStripMenuItem_Click);
             // 
             // runSQLScriptToolStripMenuItem
             // 
@@ -338,7 +329,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ToolStripMenuItem refreashTableToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem testQueryToolStripMenuItem;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;

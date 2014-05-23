@@ -8,27 +8,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
+using MySql.Data.MySqlClient;
 
 namespace ProiectPAWInterfataSGBD
 {
     public partial class Create : Form
     {
-        private static string connString;
-        private static List<TextBox> textList = new List<TextBox>();
-        private static List<ComboBox> typeList = new List<ComboBox>();
-        private static List<TextBox> sizeList = new List<TextBox>();
-        private static int x = 0;
-        private static string comanda;
+        private  string connString;
+        private string dbname;
+        private List<TextBox> textList = new List<TextBox>();
+        private List<ComboBox> typeList = new List<ComboBox>();
+        private List<TextBox> sizeList = new List<TextBox>();
+        private int x = 0;
+        private string comanda;
         public Create()
         {
             InitializeComponent();
             addColumn();
             Console.WriteLine(creareStringComanda());
         }
-        public Create(string s)
+        public Create(string s,string d)
         {
             InitializeComponent();
             connString = s;
+            dbname = d;
             addColumn();
             Console.WriteLine(creareStringComanda());
         }
@@ -56,8 +59,12 @@ namespace ProiectPAWInterfataSGBD
                     vlabel.Location = new Point(50 + nlabel.Width+30, 35 + x);
 
                     ComboBox vcombo = new ComboBox();
-                    vcombo.Items.Add("VARCHAR2");
+                    vcombo.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
+                    //vcombo.TextUpdate += new System.EventHandler(this.comboBox1_TextUpdate);
+                    vcombo.Items.Add("VARCHAR");
                     vcombo.Items.Add("INT");
+                    vcombo.Items.Add("DATE");
+                    vcombo.Items.Add("BOOL");
                     vcombo.Location = new Point(50 + ntext.Width + 30, 60 + x);
 
                     Label slabel = new Label();
@@ -132,21 +139,81 @@ namespace ProiectPAWInterfataSGBD
             int n=textList.Count;
             for (int i = 0; i < n;i++)
             {
-                if (i != n - 1)
-                { s += textList[i].Text + " " + typeList[i].Text + "("+ sizeList[i].Text +") "+", "; }
+                if (sizeList[i].Text == "None")
+                {
+                    if (i != n - 1)
+                    { s += textList[i].Text + " " + typeList[i].Text +  ", "; }
+                    else
+                    {
+                        s += textList[i].Text + " " + typeList[i].Text  + ")";
+                    }
+                }
                 else
                 {
-                    s += textList[i].Text + " " + typeList[i].Text + "(" + sizeList[i].Text + ") " + ")";
+                    if (i != n - 1)
+                    { s += textList[i].Text + " " + typeList[i].Text + "(" + sizeList[i].Text + ") " + ", "; }
+                    else
+                    {
+                        s += textList[i].Text + " " + typeList[i].Text + "(" + sizeList[i].Text + ") " + ")";
+                    }
                 }
             }
+            //s += " USE " + dbname + ";";
 
             return s;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(creareStringComanda());
+            DBConnect db = new DBConnect(connString);
+            try
+            {
+                Console.WriteLine(creareStringComanda());
+                comanda = creareStringComanda();
+
+                
+                MySqlCommand com=new MySqlCommand(comanda,db.conn);
+                db.conn.Open();
+                com.ExecuteNonQuery();
+                label2.Text = "Done";
+            }catch(Exception ex)
+            {
+                label2.Text = "Error";
+                MessageBox.Show(ex.Message);
+            }finally{
+                db.conn.Close();
+            }
         }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            ComboBox combo = (ComboBox)sender;
+            
+            Console.WriteLine(combo.SelectedText);
+            if(combo.SelectedText=="BOOL" || combo.SelectedText=="DATE")
+            {
+                int i = typeList.FindIndex(item => item == combo);
+                TextBox text =sizeList[i];
+                text.Text = "None";
+                text.Enabled = false;
+            }
+            else
+            {
+                int i = typeList.FindIndex(item => item == combo);
+                TextBox text = sizeList[i];
+                text.Text = "";
+                text.Enabled = true;
+            }
+            
+
+        }
+
+        private void comboBox1_TextUpdate(object sender, EventArgs e)
+        {
+
+        }
+
+        
 
 
     }

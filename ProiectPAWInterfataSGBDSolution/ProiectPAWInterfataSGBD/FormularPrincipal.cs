@@ -320,10 +320,16 @@ namespace ProiectPAWInterfataSGBD
 
             if (!(String.IsNullOrWhiteSpace(server) || String.IsNullOrWhiteSpace(database)))
             {
-                fMDI = new MDIParent(server, database, user, passwd);
-                this.Hide();
-                fMDI.ShowDialog();
-                this.Show();
+                try
+                {
+                    fMDI = new MDIParent(server, database, user, passwd);
+                    this.Hide();
+                    fMDI.ShowDialog();
+                    this.Show();
+                }catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 

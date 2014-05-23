@@ -288,7 +288,7 @@ namespace ProiectPAWInterfataSGBD
 
         private void runSQLScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            updateGridCommand(textBox1.Text);
         }
 
         private void saveSQLScriptToolStripMenuItem_Click(object sender, EventArgs e)
@@ -475,7 +475,7 @@ namespace ProiectPAWInterfataSGBD
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            delIndex = dataGridView1.CurrentCell.RowIndex;
         }
 
         private void dataGridView1_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -541,7 +541,7 @@ namespace ProiectPAWInterfataSGBD
         private void button2_Click(object sender, EventArgs e)
         {
             List<string> varCells=new List<string>();
-            delIndex = dataGridView1.CurrentCell.ColumnIndex;
+            delIndex = dataGridView1.CurrentCell.RowIndex;
             int j = delIndex;
             int n = tablecolumns.Count;
             //dataGridView1.Rows[i].Cells[j].Value
@@ -679,12 +679,13 @@ namespace ProiectPAWInterfataSGBD
         private void testChartToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Chart f = new Chart(connString);
-            f.ShowDialog();
+            f.MdiParent = FormularPrincipal.fMDI;
+            f.Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Create f = new Create();
+            Create f = new Create(connString,databasename);
             f.Show();
         }
 

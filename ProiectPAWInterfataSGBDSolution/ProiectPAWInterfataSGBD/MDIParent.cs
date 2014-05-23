@@ -25,6 +25,11 @@ namespace ProiectPAWInterfataSGBD
         private static int delIndex;
         private static string connString;
 
+        public MDIParent getMdi()
+        {
+            return this;
+        }
+
         public MDIParent()
         {
             InitializeComponent();

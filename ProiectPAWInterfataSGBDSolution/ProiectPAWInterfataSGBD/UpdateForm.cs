@@ -14,13 +14,12 @@ namespace ProiectPAWInterfataSGBD
 {
     public partial class UpdateForm : Form
     {
-        private static List<string> colName = new List<string>();
-        private static List<string> varCells = new List<string>();
-        private static List<string> newVarCells = new List<string>();
-        private static ArrayList textBoxList=new ArrayList();
-        private static string tableName;
-        private static string connString;
-        private static string command;
+        private  List<string> colName = new List<string>();
+        private  List<string> varCells = new List<string>();
+        private  List<string> newVarCells = new List<string>();
+        private ArrayList textBoxList=new ArrayList();
+        private  string tableName;
+        private string connString;
 
         public UpdateForm()
         {
@@ -117,6 +116,7 @@ namespace ProiectPAWInterfataSGBD
                 {
                     if (v.ToLowerInvariant().Contains("/"))
                     {
+                        Console.WriteLine("A intrat unde trebuie");
                         
                         if (i == m - 1)
                         {
@@ -128,7 +128,7 @@ namespace ProiectPAWInterfataSGBD
                         {
                             s += "" + colName[i] + "=";
                             s += "DATE(STR_TO_DATE(";
-                            s += "'" + newVarCells[i] + "'," + "'%m/%d/%Y" + "')) ";
+                            s += "'" + newVarCells[i] + "'," + "'%m/%d/%Y" + "')), ";
                         }
                     }else{
                     if (i != m - 1)
@@ -147,7 +147,8 @@ namespace ProiectPAWInterfataSGBD
             string v2 = varCells[0];
             if (v2.ToLowerInvariant().Contains("/"))
             {
-                s += "WHERE " + colName[0] + "=" + "DATE(STR_TO_DATE(" + "'" + varCells[0] + "'," + "'%m/%d/%Y" + "')) <> '0000-00-00'";
+                //+ colName[0] + "="
+                s += "WHERE "  + "DATE(STR_TO_DATE(" + "'" + varCells[0] + "'," + "'%m/%d/%Y" + "')) <> '0000-00-00'";
             }
             else
             {
