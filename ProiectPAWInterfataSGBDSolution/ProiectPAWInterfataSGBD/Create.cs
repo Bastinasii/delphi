@@ -14,9 +14,9 @@ namespace ProiectPAWInterfataSGBD
     public partial class Create : Form
     {
         private static string connString;
-        private static ArrayList textList = new ArrayList();
-        private static ArrayList typeList = new ArrayList();
-        private static ArrayList sizeList = new ArrayList();
+        private static List<TextBox> textList = new List<TextBox>();
+        private static List<ComboBox> typeList = new List<ComboBox>();
+        private static List<TextBox> sizeList = new List<TextBox>();
         private static int x = 0;
         private static string comanda;
         public Create()
@@ -125,8 +125,13 @@ namespace ProiectPAWInterfataSGBD
 
         private string creareStringComanda()
         {
-            string s = "";
+            //CREATE TABLE example ( id INT, data VARCHAR(100) 
+            string s = "CREATE TABLE "+textBox1+" ( ";
+            int n=textList.Count;
+            for (int i = 0; i < n;i++)
+            {
 
+            }
             return comanda;
         }
 
