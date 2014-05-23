@@ -31,6 +31,8 @@ namespace ProiectPAWInterfataSGBD
         TextBox pass = new TextBox();
         Button button3 = new Button();
         Button button2 = new Button();
+        Button rmButton1 = new Button();
+        Button rmButton2 = new Button();
 
         XmlReadWrite dbConf = new XmlReadWrite();
 
@@ -93,6 +95,18 @@ namespace ProiectPAWInterfataSGBD
             this.combo2.DropDownStyle = ComboBoxStyle.DropDownList;
             this.Controls.Add(combo2);
 
+            this.rmButton1.Location = new Point(430, 74);
+            this.rmButton1.Size = new Size(110, 20);
+            this.rmButton1.Text = "Remove this entry";
+            this.rmButton1.Visible = false;
+            this.Controls.Add(rmButton1);
+
+            this.rmButton2.Location = new Point(430, 44);
+            this.rmButton2.Size = new Size(110, 20);
+            this.rmButton2.Text = "Remove all entries";
+            this.rmButton2.Visible = false;
+            this.Controls.Add(rmButton2);
+
             this.check.Location = new Point(205, 107);
             this.check.Size = new Size(150, 20);
             this.check.Text = "Remember this connection";
@@ -141,6 +155,50 @@ namespace ProiectPAWInterfataSGBD
             this.button3.Click += new EventHandler(this.exit);
 
             this.button2.Click += new EventHandler(this.login);
+
+            this.rmButton1.Click += new EventHandler(this.removeEntry);
+
+            this.rmButton2.Click += new EventHandler(this.removeAllEntries);
+        }
+
+        void removeEntry(object sender, EventArgs e)
+        {
+            string entry;
+            try
+            {
+                if (this.combo2.Items.Count <= 1)
+                {
+                    entry = this.combo1.Text;
+                    dbConf.removeServer(entry);
+                    //combo1.Items.Remove(entry);
+                    combo1.DataSource = dbConf.readXml();
+                    combo2.DataSource = dbConf.readXml(combo1.Text);
+                }
+                else
+                {
+                    string srv = this.combo1.Text;
+                    entry = this.combo2.Text;
+                    dbConf.removeDb(srv, entry);
+                    //combo2.Items.Remove(entry);
+                    combo2.DataSource = dbConf.readXml(combo1.Text);
+                }
+            }
+            catch (Exception e2)
+            {
+            }
+        }
+
+        void removeAllEntries(object sender, EventArgs e)
+        {
+            try
+            {
+                File.Delete("config.xml");
+                combo1.DataSource = dbConf.readXml();
+                combo2.DataSource = dbConf.readXml(combo1.Text);
+            }
+            catch (Exception t)
+            {
+            }
         }
 
         void choice(object sender, EventArgs e)
@@ -153,6 +211,8 @@ namespace ProiectPAWInterfataSGBD
                 this.label2.Visible = true;
                 this.text2.Text = "";
                 this.text2.Visible = true;
+                this.rmButton1.Visible = false;
+                this.rmButton2.Visible = false;
                 this.check.Checked = false;
                 this.check.Visible = true;
                 this.label3.Visible = true;
@@ -175,6 +235,8 @@ namespace ProiectPAWInterfataSGBD
                 this.label2.Visible = true;
                 this.combo2.Text = "";
                 this.combo2.Visible = true;
+                this.rmButton1.Visible = true;
+                this.rmButton2.Visible = true;
                 this.label3.Visible = true;
                 this.text3.Text = "";
                 this.text3.Visible = true;
@@ -218,22 +280,29 @@ namespace ProiectPAWInterfataSGBD
                 server = text1.Text;
                 database = text2.Text;
 
-                if (this.check.Checked)
+                if (String.IsNullOrWhiteSpace(server) || String.IsNullOrWhiteSpace(database))
                 {
-                    if (!File.Exists("config.xml"))
+                    MessageBox.Show("Trebuie introduse toate datele de conectare!");
+                }
+                else
+                {
+                    if (this.check.Checked)
                     {
-                        dbConf.createXml();
-                    }
-
-                    if (!(dbConf.exists(server, database)))
-                    {
-                        if (!(dbConf.exists(server)))
+                        if (!File.Exists("config.xml"))
                         {
-                            dbConf.writeXml(server, database);
+                            dbConf.createXml();
                         }
-                        else
+
+                        if (!(dbConf.exists(server, database)))
                         {
-                            dbConf.writeXmlDb(server, database);
+                            if (!(dbConf.exists(server)))
+                            {
+                                dbConf.writeXml(server, database);
+                            }
+                            else
+                            {
+                                dbConf.writeXmlDb(server, database);
+                            }
                         }
                     }
                 }
@@ -249,10 +318,13 @@ namespace ProiectPAWInterfataSGBD
             //EditQueryF f = new EditQueryF(server, database, user, passwd);
             //f.ShowDialog();
 
-            fMDI = new MDIParent(server, database, user, passwd);
-            this.Hide();
-            fMDI.ShowDialog();
-            this.Show();
+            if (!(String.IsNullOrWhiteSpace(server) || String.IsNullOrWhiteSpace(database)))
+            {
+                fMDI = new MDIParent(server, database, user, passwd);
+                this.Hide();
+                fMDI.ShowDialog();
+                this.Show();
+            }
         }
 
         

@@ -150,6 +150,52 @@ namespace ProiectPAWInterfataSGBD
             }
         }
 
+        public void removeServer(string node)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+
+            try
+            {
+                xmlDoc.Load("config.xml");
+
+                XmlElement server = (XmlElement)xmlDoc.SelectSingleNode("/servers/server[name='" + node + "']");
+                if (server != null)
+                {
+                    server.ParentNode.RemoveChild(server);
+                }
+
+                xmlDoc.Save("config.xml");
+            }
+
+            catch (Exception e)
+            {
+                MessageBox.Show("XML corupt!");
+            }
+        }
+
+        public void removeDb(string srv, string node)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+
+            try
+            {
+                xmlDoc.Load("config.xml");
+
+                XmlElement server = (XmlElement)xmlDoc.SelectSingleNode("/servers/server[name='" + srv + "']/database[dbname='" + node + "']");
+                if (server != null)
+                {
+                    server.ParentNode.RemoveChild(server);
+                }
+
+                xmlDoc.Save("config.xml");
+            }
+
+            catch (Exception e)
+            {
+                MessageBox.Show("XML corupt!");
+            }
+        }
+
         public List<string> readXml()
         {
             List<string> servers = new List<string>();
@@ -161,11 +207,12 @@ namespace ProiectPAWInterfataSGBD
                     if (reader.Name == srvTag)
                     {
                         reader.Read();
-                        if (reader.Value != "") servers.Add(reader.Value);
+                        if (!(String.IsNullOrWhiteSpace(reader.Value))) servers.Add(reader.Value);
                         reader.Read();
                     }
                 }
                 reader.Close();
+                servers.Sort();
             }
             catch (Exception e)
             {
@@ -173,12 +220,13 @@ namespace ProiectPAWInterfataSGBD
             }
             return servers;
         }
+        
 
         public List<string> readXml(String server)
         {
             List<string> dbs = new List<string>();
-
-            if (server == "")
+            
+            if (String.IsNullOrWhiteSpace(server))
             {
                 dbs = null;
             }
@@ -201,7 +249,7 @@ namespace ProiectPAWInterfataSGBD
                                     if (reader.Name == dbTag)
                                     {
                                         reader.Read();
-                                        if (reader.Value != "") dbs.Add(reader.Value);
+                                        if (!(String.IsNullOrWhiteSpace(reader.Value))) dbs.Add(reader.Value);
                                         reader.Read();
                                     }
                                 }
@@ -209,12 +257,13 @@ namespace ProiectPAWInterfataSGBD
                         }
                     }
                     reader.Close();
+                    dbs.Sort();
                 }
                 catch (Exception e)
                 {
                     dbs = null;
                 }
-            }         
+            }
             return dbs;
         }
     }
