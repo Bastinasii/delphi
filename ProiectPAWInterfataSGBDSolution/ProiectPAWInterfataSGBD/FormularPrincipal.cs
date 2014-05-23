@@ -14,6 +14,7 @@ namespace ProiectPAWInterfataSGBD
 {
     public partial class FormularPrincipal : Form
     {
+        public static MDIParent fMDI;
         GroupBox group = new GroupBox();
         RadioButton radio1 = new RadioButton();
         RadioButton radio2 = new RadioButton();
@@ -245,23 +246,32 @@ namespace ProiectPAWInterfataSGBD
             string user = text3.Text;
             string passwd = pass.Text;
 
-            EditQueryF f = new EditQueryF(server, database, user, passwd);
-            f.ShowDialog();
+            //EditQueryF f = new EditQueryF(server, database, user, passwd);
+            //f.ShowDialog();
+
+            fMDI = new MDIParent(server, database, user, passwd);
+            this.Hide();
+            fMDI.ShowDialog();
+            this.Show();
         }
 
         
 
         private void button1_Click(object sender, EventArgs e)
         {
-            EditQueryF f = new EditQueryF();
-            f.ShowDialog();
-
+            //EditQueryF f = new EditQueryF();
+            //f.Show();
+            //MDIParent f = new MDIParent();
+            //this.Hide();
+            //f.ShowDialog();
+            //this.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            
             MDIParent f = new MDIParent();
-            f.ShowDialog();
+            f.Show();
         }
 
         private void FormularPrincipal_Load(object sender, EventArgs e)
