@@ -99,23 +99,71 @@ namespace ProiectPAWInterfataSGBD
 
             for (int i = 0; i < m; i++)
             {
-                if (i != m - 1)
+                string v = newVarCells[i];
+                if (v == "True" || s == "False")
                 {
-                    s += "" + colName[i] + "=";
-                    s += "'" + newVarCells[i] + "',";
+                    if (i != m - 1)
+                    {
+                        s += "" + colName[i] + "=";
+                        s += "" + newVarCells[i] + ",";
+                    }
+                    else
+                    {
+                        s += "" + colName[i] + "=";
+                        s += "" + newVarCells[i] + " ";
+                    }
                 }
                 else
                 {
-                    s += "" + colName[i] + "=";
-                    s += "'" + newVarCells[i] + "' ";
+                    if (v.ToLowerInvariant().Contains("/"))
+                    {
+                        
+                        if (i == m - 1)
+                        {
+                            s += "" + colName[i] + "=";
+                            s += "DATE(STR_TO_DATE(";
+                            s += "'" + newVarCells[i] + "'," + "'%m/%d/%Y" + "')) ";
+                        }
+                        else
+                        {
+                            s += "" + colName[i] + "=";
+                            s += "DATE(STR_TO_DATE(";
+                            s += "'" + newVarCells[i] + "'," + "'%m/%d/%Y" + "')) ";
+                        }
+                    }else{
+                    if (i != m - 1)
+                    {
+                        s += "" + colName[i] + "=";
+                        s += "'" + newVarCells[i] + "',";
+                    }
+                    else
+                    {
+                        s += "" + colName[i] + "=";
+                        s += "'" + newVarCells[i] + "' ";
+                    }
+                    }
                 }
             }
-                s+="WHERE "+colName[0]+"="+varCells[0];
+            string v2 = varCells[0];
+            if (v2.ToLowerInvariant().Contains("/"))
+            {
+                s += "WHERE " + colName[0] + "=" + "DATE(STR_TO_DATE(" + "'" + varCells[0] + "'," + "'%m/%d/%Y" + "')) <> '0000-00-00'";
+            }
+            else
+            {
+                s += "WHERE " + colName[0] + "=" + varCells[0];
+                
+            }
 
                 return s;
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpdateForm_Load(object sender, EventArgs e)
         {
 
         }

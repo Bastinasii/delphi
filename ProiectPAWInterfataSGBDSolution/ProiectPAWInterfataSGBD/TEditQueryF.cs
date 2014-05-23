@@ -47,7 +47,7 @@ namespace ProiectPAWInterfataSGBD
             connString = "user id=" + user + ";" +
                                    "password=" + pass + ";server=" + server + ";" +
                                    "database=" + databasename + ";" +
-                                   "connection timeout=10";
+                                   "connection timeout=10;Convert Zero Datetime=True";
             Console.WriteLine(connString);
             updateTables();
             
@@ -401,17 +401,51 @@ namespace ProiectPAWInterfataSGBD
                     com += "values (";
                     for (j = 0; j < m; j++)
                     {
-                        if (j == m - 1)
+                        string s = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                        Console.WriteLine(s);
+                        if (s == "True" || s == "False")
                         {
-                            com += "'" + dataGridView1.Rows[i].Cells[j].Value + "') ";
+                            Console.WriteLine("A intrat in if");
+                            if (j == m - 1)
+                            {
+                                com += "" + dataGridView1.Rows[i].Cells[j].Value + ") ";
+                            }
+                            else
+                            {
+                                com += "" + dataGridView1.Rows[i].Cells[j].Value + ", ";
+                            }
                         }
                         else
                         {
-                            com += "'" + dataGridView1.Rows[i].Cells[j].Value + "', ";
+                            if(s.ToLowerInvariant().Contains("/"))
+                            {
+                                //INSERT INTO `data`(`Data_Mea`) VALUES (STR_TO_DATE('1-01-2012', '%d-%m-%Y %h-%m-%s'))
+                                Console.WriteLine("Test: A intrat in insertia datei");
+                                com += "STR_TO_DATE(";
+                                    if (j == m - 1)
+                                {
+                                    com += "'" + dataGridView1.Rows[i].Cells[j].Value +"',"+"'%m/%d/%Y  "+ "')) ";
+                                }
+                                else
+                                {
+                                    com += "'" + dataGridView1.Rows[i].Cells[j].Value + "'," + "'%m/%d/%Y" + "'), ";
+                                }
+
+                            }else{
+                            if (j == m - 1)
+                            {
+                                com += "'" + dataGridView1.Rows[i].Cells[j].Value + "') ";
+                            }
+                            else
+                            {
+                                com += "'" + dataGridView1.Rows[i].Cells[j].Value + "', ";
+                            }
+                            }
                         }
                     }
                     //com += "values (" + dataGridView1.Rows[i].Cells[0].Value + ",'" + dataGridView1.Rows[i].Cells[1].Value + "'," + dataGridView1.Rows[i].Cells[2].Value + ")";
                         command = new MySqlCommand(com, conn);
+                        Console.WriteLine(com);
                     conn.Open();
                     command.ExecuteNonQuery();
                     conn.Close();
@@ -446,7 +480,7 @@ namespace ProiectPAWInterfataSGBD
 
         private void dataGridView1_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            delIndex = dataGridView1.CurrentCell.ColumnIndex;
+            delIndex = dataGridView1.CurrentCell.RowIndex;
             
 
             //string name = dataGridView1.Columns[Index].Name;
@@ -506,20 +540,24 @@ namespace ProiectPAWInterfataSGBD
 
         private void button2_Click(object sender, EventArgs e)
         {
-            List<string> varCells = new List<string>();
+            List<string> varCells=new List<string>();
+            delIndex = dataGridView1.CurrentCell.ColumnIndex;
             int j = delIndex;
             int n = tablecolumns.Count;
             //dataGridView1.Rows[i].Cells[j].Value
             for (int i=0;i<n;i++)
             {
+                
                 string s = "";
                 varCells.Add(s+dataGridView1.Rows[j].Cells[i].Value);
+                
             }
             try
             {
 
                 UpdateForm f = new UpdateForm(tablecolumns, varCells,connString,tableName);
                 f.ShowDialog();
+                varCells.Clear();
             }
             catch(Exception ex)
             {
@@ -648,6 +686,11 @@ namespace ProiectPAWInterfataSGBD
         {
             Create f = new Create();
             f.Show();
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

@@ -23,12 +23,14 @@ namespace ProiectPAWInterfataSGBD
         {
             InitializeComponent();
             addColumn();
+            Console.WriteLine(creareStringComanda());
         }
         public Create(string s)
         {
             InitializeComponent();
             connString = s;
             addColumn();
+            Console.WriteLine(creareStringComanda());
         }
 
         private void Create_Load(object sender, EventArgs e)
@@ -55,7 +57,7 @@ namespace ProiectPAWInterfataSGBD
 
                     ComboBox vcombo = new ComboBox();
                     vcombo.Items.Add("VARCHAR2");
-                    vcombo.Items.Add("INTEGER");
+                    vcombo.Items.Add("INT");
                     vcombo.Location = new Point(50 + ntext.Width + 30, 60 + x);
 
                     Label slabel = new Label();
@@ -126,13 +128,24 @@ namespace ProiectPAWInterfataSGBD
         private string creareStringComanda()
         {
             //CREATE TABLE example ( id INT, data VARCHAR(100) 
-            string s = "CREATE TABLE "+textBox1+" ( ";
+            string s = "CREATE TABLE "+textBox1.Text+" ( ";
             int n=textList.Count;
             for (int i = 0; i < n;i++)
             {
-
+                if (i != n - 1)
+                { s += textList[i].Text + " " + typeList[i].Text + "("+ sizeList[i].Text +") "+", "; }
+                else
+                {
+                    s += textList[i].Text + " " + typeList[i].Text + "(" + sizeList[i].Text + ") " + ")";
+                }
             }
-            return comanda;
+
+            return s;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(creareStringComanda());
         }
 
 
