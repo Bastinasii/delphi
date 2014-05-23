@@ -646,8 +646,8 @@ namespace ProiectPAWInterfataSGBD
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Form Create = new Form();
-            Create.Show();
+            Create f = new Create();
+            f.Show();
         }
     }
 }

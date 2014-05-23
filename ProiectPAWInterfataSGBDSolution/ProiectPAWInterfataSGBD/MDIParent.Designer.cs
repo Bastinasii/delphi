@@ -31,10 +31,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sQLEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dBTreeviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.populareTreeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.populareTreeViewMoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dBTreeviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +44,7 @@
             this.newToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(500, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(688, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -67,6 +67,13 @@
             this.sQLEditorToolStripMenuItem.Text = "SQLEditor";
             this.sQLEditorToolStripMenuItem.Click += new System.EventHandler(this.sQLEditorToolStripMenuItem_Click);
             // 
+            // dBTreeviewToolStripMenuItem
+            // 
+            this.dBTreeviewToolStripMenuItem.Name = "dBTreeviewToolStripMenuItem";
+            this.dBTreeviewToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.dBTreeviewToolStripMenuItem.Text = "DB Treeview";
+            this.dBTreeviewToolStripMenuItem.Click += new System.EventHandler(this.dBTreeviewToolStripMenuItem_Click);
+            // 
             // newConnectionToolStripMenuItem
             // 
             this.newConnectionToolStripMenuItem.Name = "newConnectionToolStripMenuItem";
@@ -88,18 +95,11 @@
             this.populareTreeViewMoreToolStripMenuItem.Text = "PopulareTree View More";
             this.populareTreeViewMoreToolStripMenuItem.Click += new System.EventHandler(this.populareTreeViewMoreToolStripMenuItem_Click);
             // 
-            // dBTreeviewToolStripMenuItem
-            // 
-            this.dBTreeviewToolStripMenuItem.Name = "dBTreeviewToolStripMenuItem";
-            this.dBTreeviewToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.dBTreeviewToolStripMenuItem.Text = "DB Treeview";
-            this.dBTreeviewToolStripMenuItem.Click += new System.EventHandler(this.dBTreeviewToolStripMenuItem_Click);
-            // 
             // MDIParent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 362);
+            this.ClientSize = new System.Drawing.Size(688, 445);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
