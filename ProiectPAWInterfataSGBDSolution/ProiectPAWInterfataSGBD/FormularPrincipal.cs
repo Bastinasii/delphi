@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Controls;
+using System.IO;
 
 namespace ProiectPAWInterfataSGBD
 {
@@ -215,6 +216,26 @@ namespace ProiectPAWInterfataSGBD
             {
                 server = text1.Text;
                 database = text2.Text;
+
+                if (this.check.Checked)
+                {
+                    if (!File.Exists("config.xml"))
+                    {
+                        dbConf.createXml();
+                    }
+
+                    if (!(dbConf.exists(server, database)))
+                    {
+                        if (!(dbConf.exists(server)))
+                        {
+                            dbConf.writeXml(server, database);
+                        }
+                        else
+                        {
+                            dbConf.writeXmlDb(server, database);
+                        }
+                    }
+                }
             }
             else
             {
